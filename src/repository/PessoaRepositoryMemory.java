@@ -12,8 +12,13 @@ public class PessoaRepositoryMemory implements PessoaRepository {
     }
 
 
-    public List<Pessoa> listarTodos() {
-        return pessoa;
+    public List<Pessoa> listarTodos() throws Exception {
+        if (pessoa.isEmpty()){
+            throw new Exception("Nem uma pessoa cadastrada!!!");
+        }
+        else {
+            return pessoa;
+        }
     }
 
     public Pessoa buscarPorId(Integer id) throws Exception {
@@ -26,12 +31,17 @@ public class PessoaRepositoryMemory implements PessoaRepository {
             throw new Exception("Pessoa não encontrada");
     }
 
-    public void atualizar(Pessoa pessoa)throws Exception {
-       Pessoa getPessoa=buscarPorId(pessoa.getId());
+    public void atualizar(int id,String nome,String CPF, String email)throws Exception {
+       Pessoa getPessoa=buscarPorId(id);
 
-       getPessoa.setCpf(pessoa.getCpf());
-       getPessoa.setEmail(pessoa.getEmail());
-       getPessoa.setName(pessoa.getName());
+       getPessoa.setName(nome);
+       getPessoa.setCpf(CPF);
+       getPessoa.setEmail(email);
+        System.out.println("--------------------------");
+        System.out.println("ATUALIZADO COM SUCESSO!!!");
+        System.out.println("--------------------------");
+
+
     }
     public void deletar(Integer id) throws Exception{
         Pessoa buscPessoa=buscarPorId(id);

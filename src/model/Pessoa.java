@@ -9,7 +9,7 @@ public class Pessoa {
 
 
     public Pessoa(String name, String cpf, String email) {
-        cont=+1;
+        cont+=1;
         this.id=cont;
         this.name = name;
         this.cpf = cpf;
