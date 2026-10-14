@@ -7,6 +7,8 @@ public class Pessoa {
     private String email;
     private static int cont=0;
 
+    public Pessoa() {
+    }
 
     public Pessoa(String name, String cpf, String email) {
         cont+=1;
@@ -21,12 +23,20 @@ public class Pessoa {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name) throws Exception{
+        if(name==null){
+        throw new Exception("Nome invalido");
+    }else{
         this.name = name;
+    }
     }
 
     public String getCpf() {

@@ -3,56 +3,59 @@ import model.Pessoa;
 import java.awt.*;
 import java.util.List;
 import java.util.Scanner;
+
 import repository.PessoaRepository;
+import repository.PessoaRepositoryBD;
 import repository.PessoaRepositoryMemory;
+
 public class Main {
     public static void main(String[] args) {
-        PessoaRepository repo = new PessoaRepositoryMemory();
+        PessoaRepository repo = new PessoaRepositoryBD();
 
-   Scanner input=new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
 
-    boolean status=true;
+        boolean status = true;
 
-    while (status){
-        System.out.println("--------------------------------------------------");
-        System.out.println("Cadastrar uma pessoa: 1");
-        System.out.println("Listar pessoa: 2");
-        System.out.println("Buscar pessoa: 3");
-        System.out.println("Atualizar pessoa: 4");
-        System.out.println("Deletar pessoa: 5");
-        System.out.println("Encerrar: 0");
-        int opcao=input.nextInt();
-        input.nextLine();
-        switch (opcao){
-            case 1:
-                System.out.println("Nome: ");
-                String nome=input.nextLine();
+        while (status) {
+            System.out.println("--------------------------------------------------");
+            System.out.println("Cadastrar uma pessoa: 1");
+            System.out.println("Listar pessoa: 2");
+            System.out.println("Buscar pessoa: 3");
+            System.out.println("Atualizar pessoa: 4");
+            System.out.println("Deletar pessoa: 5");
+            System.out.println("Encerrar: 0");
+            int opcao = input.nextInt();
+            input.nextLine();
+            switch (opcao) {
+                case 1:
+                    System.out.println("Nome: ");
+                    String nome = input.nextLine();
 
-                System.out.println("CPF: ");
-                String cpf=input.nextLine();
+                    System.out.println("CPF: ");
+                    String cpf = input.nextLine();
 
-                System.out.println("Email: ");
-                String email= input.nextLine();
-                Pessoa pessoa=new Pessoa(nome,cpf,email);
-                repo.salvar(pessoa);
-                break;
-            case 2:
-                try {
-                    List<Pessoa> lista=repo.listarTodos();
+                    System.out.println("Email: ");
+                    String email = input.nextLine();
+                    Pessoa pessoa = new Pessoa(nome, cpf, email);
+                    repo.salvar(pessoa);
+                    break;
+                case 2:
+                    try {
+                        List<Pessoa> lista = repo.listarTodos();
+                        if (lista.isEmpty()) {
+                            System.out.println("Nenhuma pessoa cadastrada");
+                        } else {
+                            for (int i = 0; i < lista.size(); i++) {
+                                System.out.println("[Id] " + lista.get(i).getId() + " [Nome] " + lista.get(i).getName() +
+                                        " [CPF] " + lista.get(i).getCpf()+ " [Email] " + lista.get(i).getEmail() +"\n");
+                            }
+                        }
+                    } catch (Exception e) {
 
-                    for (int i=0;i<lista.size();i++){
-                        System.out.println("---------------------------------");
-                        System.out.println("Id: "+lista.get(i).getId());
-                        System.out.println("Nome: "+lista.get(i).getName());
-                        System.out.println("CPF: "+lista.get(i).getCpf());
-                        System.out.println("Email: "+lista.get(i).getEmail());
+                        System.out.println("Erro: " + e.getMessage());
                     }
-                }catch (Exception e){
-
-                    System.out.println("Erro: " + e.getMessage());
-                }
-                break;
-            case 3:
+                    break;
+            /*case 3:
                 System.out.println("Digite o id");
 
                 int idBusca=input.nextInt();
@@ -97,17 +100,17 @@ public class Main {
                 }
                 break;
 
+*/
+                case 0:
+                    status = false;
+                    System.out.println("Sistema encerrado");
+                    break;
+                default:
+                    System.out.println("Opção não existe");
+                    break;
+            }
 
-            case 0:
-                status=false;
-                System.out.println("Sistema encerrado");
-                break;
-            default:
-                System.out.println("Opção não existe");
-                break;
         }
-
-    }
 
     }
 }
