@@ -46,7 +46,7 @@ public class Main {
                             System.out.println("Nenhuma pessoa cadastrada");
                         } else {
                             for (int i = 0; i < lista.size(); i++) {
-                                System.out.println("[Id] " + lista.get(i).getId() + " [Nome] " + lista.get(i).getName() +
+                                 System.out.println("[Id] " + lista.get(i).getId() + " [Nome] " + lista.get(i).getName() +
                                         " [CPF] " + lista.get(i).getCpf()+ " [Email] " + lista.get(i).getEmail() +"\n");
                             }
                         }
@@ -55,7 +55,7 @@ public class Main {
                         System.out.println("Erro: " + e.getMessage());
                     }
                     break;
-            /*case 3:
+            case 3:
                 System.out.println("Digite o id");
 
                 int idBusca=input.nextInt();
@@ -71,7 +71,7 @@ public class Main {
                     System.out.println("Erro: "+ e.getMessage());
                 }
                 break;
-            case 4:
+              case 4:
                 System.out.println("Digite o id");
                 int id=input.nextInt();
                 input.nextLine();
@@ -100,7 +100,6 @@ public class Main {
                 }
                 break;
 
-*/
                 case 0:
                     status = false;
                     System.out.println("Sistema encerrado");
